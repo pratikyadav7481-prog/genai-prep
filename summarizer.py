@@ -1,6 +1,12 @@
 import asyncio
 import sys
 import httpx
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+token = os.getenv("OPENAI_API_KEY")
 
 
 async def summarize(text : str):
@@ -8,7 +14,7 @@ async def summarize(text : str):
         response = await client.post(
             "https://api.openai.com/v1/chat/completions",
             headers={
-               "Authorization": "Bearer {token}",
+               "Authorization": f"Bearer {token}",
                 "Content-Type": "application/json"  
             },
             json={
